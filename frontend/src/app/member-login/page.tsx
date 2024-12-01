@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+import BASE_URL from '../services/BaseAddress';
 
 interface MemberDetails {
   name: string;

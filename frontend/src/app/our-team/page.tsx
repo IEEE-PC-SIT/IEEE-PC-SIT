@@ -1,9 +1,8 @@
+import MembersGrid from "./MemberCard";
 export default function OurTeam() {
-    return (
-        <div className="mt-[110px]">     
-           
-            This is our team pagee,
-          </div>
-    
-      );
-  }
+  return (
+    <div className="mt-[110px]">
+      <MembersGrid />
+    </div>
+  );
+}

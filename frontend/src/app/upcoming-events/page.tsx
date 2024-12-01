@@ -2,12 +2,14 @@
 import { TypewriterEffectSmooth } from "../components/ui/typeWriterEffect/typeWriterEffect";
 import { SparklesCore } from "../components/ui/sparkles/Sparkles";
 import React, { useEffect, useState } from "react";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 interface EventData {
   name: string;
-  imageUrl: string;
-  desc: string;
+  photo: string;
+  description: string;
   date: string;
-  registrationLink: string;
+  registerLink: string;
 }
 
 export default function UpComing() {
@@ -26,19 +28,46 @@ export default function UpComing() {
 
   const [eventData, setEventData] = useState<EventData | null>(null);
 
+  // useEffect(() => {
+  //   // Simulating an API call with dummy data
+  //   const dummyData: EventData = {
+  //     name: "ReactJS Workshop 2024",
+  //     photo: "WhatsApp Image 2024-11-17 at 11.31.09 PM.jpeg",
+  //     // photo: "WhatsApp Image 2024-11-17 at 11.31.10 PM.jpeg",
+  //     description: "some content based on reactjswill be given u will enjoy ,paly and learn but only thing is you have to pay fee foreach and every one.(Exclusively for First years)",
+  //     date: "January 15, 2024",
+  //     registerLink: "https://images.google.com/",
+  //   };
+  //   // Setting the dummy data to state after "fetching"
+  //   setEventData(dummyData);
+  // }, []);
+
   useEffect(() => {
-    // Simulating an API call with dummy data
-    const dummyData: EventData = {
-      name: "ReactJS Workshop 2024",
-      imageUrl: "WhatsApp Image 2024-11-17 at 11.31.09 PM.jpeg",
-      // imageUrl: "WhatsApp Image 2024-11-17 at 11.31.10 PM.jpeg",
-      desc: "some content based on reactjswill be given u will enjoy ,paly and learn but only thing is you have to pay fee foreach and every one.(Exclusively for First years)",
-      date: "January 15, 2024",
-      registrationLink: "https://images.google.com/",
+    const fetchUpcomingEvent = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/newevent/list-new-events`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch event details!");
+        }
+        const events = await response.json();
+        if (events.length > 0) {
+          const upcomingEvent = events[0]; // Assuming the first event is the next upcoming event
+          setEventData({
+            name: upcomingEvent.name,
+            photo: upcomingEvent.photo,
+            description: upcomingEvent.description,
+            date: new Date(upcomingEvent.date).toLocaleDateString(), // Format the date as needed
+            registerLink: upcomingEvent.registerLink,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching event:", error);
+      }
     };
-    // Setting the dummy data to state after "fetching"
-    setEventData(dummyData);
+  
+    fetchUpcomingEvent();
   }, []);
+  
 
   return (
     <div className="mt-[110px]">
@@ -80,7 +109,7 @@ export default function UpComing() {
           {/* First Div */}
           <div className="w-full lg:w-1/2  p-4 rounded-3xl">
             <img
-              src={eventData.imageUrl}
+              src={eventData.photo}
               alt="Event"
               className="w-full h-auto object-cover rounded-lg mb-2"
             />
@@ -92,7 +121,7 @@ export default function UpComing() {
               {eventData.name}
             </h2>
             <p className="text-left text-gray-200 mb-6">
-              About event: {eventData.desc}
+              About event: {eventData.description}
               <br />
               <span className="block text-left mt-2 font-medium text-gray-400">
                 Date: {eventData.date}
@@ -100,7 +129,7 @@ export default function UpComing() {
             </p>
             <div className="flex justify-end">
               <a
-                href={eventData.registrationLink}
+                href={eventData.registerLink}
                 className="py-2 px-4 bg-orange-500 text-white font-bold text-lg rounded-lg text-center hover:bg-orange-600 transition duration-300"
               >
                 Register Now

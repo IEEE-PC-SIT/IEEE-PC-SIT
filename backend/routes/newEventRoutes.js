@@ -52,7 +52,6 @@ router.put('/update-new-event/:id',adminAuth, upload.single('photo'), async (req
     await event.save();
     res.json({ message: 'Event updated successfully', event });
   } catch (err) {
-    console.log(err.message);
     res.status(500).json({ message: 'Error updating event', error: err.message });
   }
 });

@@ -56,7 +56,7 @@ router.put('/update-event/:id',adminAuth, upload.array('photos', 10), async (req
   }
 });
 
-router.get('/list-events',adminAuth, async (req, res) => {
+router.get('/list-events', async (req, res) => {
   try {
     const events = await Event.find().sort({ date: 1 }); // Sort by date
     res.json(events);

@@ -41,10 +41,9 @@ router.put('/update-new-event/:id',adminAuth, upload.single('photo'), async (req
     const event = await NewEvent.findById(req.params.id);
     if (!event) return res.status(404).json({ message: 'Event not found' });
     if (req.file) {
-      await cloudinary.uploader.destroy(event.public_id);
+      await cloudinary.uploader.destroy(event.photo);
       const result = await cloudinary.uploader.upload(req.file.path);
       event.photo = result.secure_url;
-      event.public_id = result.public_id;
     }
     event.name = req.body.name || event.name;
     event.date = req.body.date || event.date;
@@ -53,11 +52,12 @@ router.put('/update-new-event/:id',adminAuth, upload.single('photo'), async (req
     await event.save();
     res.json({ message: 'Event updated successfully', event });
   } catch (err) {
+    console.log(err.message);
     res.status(500).json({ message: 'Error updating event', error: err.message });
   }
 });
 
-router.get('/list-new-events',adminAuth, async (req, res) => {
+router.get('/list-new-events', async (req, res) => {
   try {
     const events = await NewEvent.find().sort({ date: 1 }); // Sort by date
     res.json(events);

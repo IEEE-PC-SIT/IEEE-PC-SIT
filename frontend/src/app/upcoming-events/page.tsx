@@ -72,7 +72,7 @@ export default function UpComing() {
   
 
   return (
-    <div className="mt-[110px]">
+    <div className="mt-[160px] sm:mt-[120px] md:mt-[140px] lg:mt-[110px]">
       {!eventData ? (
         <div
           className="w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md "

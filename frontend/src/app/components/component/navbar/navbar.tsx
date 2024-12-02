@@ -11,7 +11,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 z-40 w-full">
       {/* Marquee */}
-      <div className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white text-sm py-1 overflow-hidden">
+      <div className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 text-white text-sm py-1 overflow-hidden">
         <div className="animate-marquee whitespace-nowrap">
           <a href="/upcoming-events">
             🔥 Welcome to IEEE Photonics and ComSoc! Join us for exciting events
@@ -25,13 +25,13 @@ export default function Navbar() {
         <div className="container mx-auto flex justify-between items-center py-4 px-6">
           {/* Logo and Club Name */}
           <div className="flex items-center gap-4">
-            <img
-              src="/logo.png" // Replace with your logo path
+            <img 
+              src="/logo.jpeg" // Replace with your logo path
               alt="Club Logo"
               className="w-10 h-10 rounded-full"
             />
-            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-500 to-orange-500 bg-clip-text text-transparent">
-              IEEE Photonics & ComSoc
+            <h1 className="text-xl md:text-2xl lg:text-2xl font-bold bg-gradient-to-r from-blue-500 to-orange-500 bg-clip-text text-transparent">
+              IEEE Photonics & ComSoc Joint Chapter
             </h1>
           </div>
 

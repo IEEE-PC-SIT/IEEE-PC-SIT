@@ -12,7 +12,7 @@ const NavBar = () => {
   return (
     <div className="Navbar">
       <div className="logo">
-        <img src="logo.png" alt="" />
+        <img src="logo.jpeg" alt="" />
         <Link to="/"><p>IEEE Photonics & ComSoc  <span>ADMIN</span></p> </Link> 
       </div>
       <div className="cart-login">

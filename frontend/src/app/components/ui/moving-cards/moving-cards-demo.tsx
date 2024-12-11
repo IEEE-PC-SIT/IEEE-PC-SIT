@@ -19,7 +19,7 @@ const testimonials = [
   {
     title: "A Vision Realized",
     content:
-      "IEEE Photonics and ComSoc Joint Chapter was founded in 2019 by visionary students Karthik BM, Aditya PM, Bharat GC, and Sushil CM. Under the guidance of esteemed faculty Dr. KC Narasimha Murthy sir and Dr. TN Chandrika ma'am, our mission has always been to empower students in both technical and personal growth.",
+      "IEEE Photonics and ComSoc Joint Chapter was founded in 2019 by visionary students. Under the guidance of esteemed faculty Dr. KC Narasimha Murthy sir and Dr. TN Chandrika ma'am, our mission has always been to empower students in both technical and personal growth.",
     name: " Our Founding Story",
     
   },

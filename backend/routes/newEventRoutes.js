@@ -16,7 +16,7 @@ const upload = multer({ storage });
 router.post('/new-event',adminAuth, upload.single('photo'), async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.file.path);
-    const newEvent = new NewEvent({ name: req.body.name, date: req.body.date, description: req.body.description, photo: result.secure_url, registerLink: req.body.registerLink });
+    const newEvent = new NewEvent({ name: req.body.name, date: req.body.date, description: req.body.description, photo: result.secure_url, registerLink: req.body.registerLink ,lastDate: req.body.lastDate});
     await newEvent.save();
     res.status(201).json({ message: 'New event created successfully', newEvent });
   } catch (err) {
@@ -49,6 +49,7 @@ router.put('/update-new-event/:id',adminAuth, upload.single('photo'), async (req
     event.date = req.body.date || event.date;
     event.description = req.body.description || event.description;
     event.registerLink = req.body.registerLink || event.registerLink;
+    event.lastDate = req.body.lastDate || event.lastDate;
     await event.save();
     res.json({ message: 'Event updated successfully', event });
   } catch (err) {

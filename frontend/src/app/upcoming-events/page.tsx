@@ -1,9 +1,7 @@
 "use client";
 import { TypewriterEffectSmooth } from "../components/ui/typeWriterEffect/typeWriterEffect";
 import { SparklesCore } from "../components/ui/sparkles/Sparkles";
-import React, { useEffect, useState } from "react";
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
+import React, { useEffect, useState, useRef } from "react";
 import BASE_URL from '../services/BaseAddress';
 
 interface EventData {
@@ -12,6 +10,7 @@ interface EventData {
   description: string;
   date: string;
   registerLink: string;
+  lastDate: string;
 }
 
 export default function UpComing() {
@@ -29,20 +28,8 @@ export default function UpComing() {
   ];
 
   const [eventData, setEventData] = useState<EventData | null>(null);
-
-  // useEffect(() => {
-  //   // Simulating an API call with dummy data
-  //   const dummyData: EventData = {
-  //     name: "ReactJS Workshop 2024",
-  //     photo: "WhatsApp Image 2024-11-17 at 11.31.09 PM.jpeg",
-  //     // photo: "WhatsApp Image 2024-11-17 at 11.31.10 PM.jpeg",
-  //     description: "some content based on reactjswill be given u will enjoy ,paly and learn but only thing is you have to pay fee foreach and every one.(Exclusively for First years)",
-  //     date: "January 15, 2024",
-  //     registerLink: "https://images.google.com/",
-  //   };
-  //   // Setting the dummy data to state after "fetching"
-  //   setEventData(dummyData);
-  // }, []);
+  const [isVisible, setIsVisible] = useState(false);
+  const eventCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchUpcomingEvent = async () => {
@@ -58,8 +45,9 @@ export default function UpComing() {
             name: upcomingEvent.name,
             photo: upcomingEvent.photo,
             description: upcomingEvent.description,
-            date: new Date(upcomingEvent.date).toLocaleDateString(), // Format the date as needed
+            date: new Date(upcomingEvent.date).toLocaleDateString(),
             registerLink: upcomingEvent.registerLink,
+            lastDate: new Date(upcomingEvent.lastDate).toLocaleDateString(),
           });
         }
       } catch (error) {
@@ -69,7 +57,36 @@ export default function UpComing() {
   
     fetchUpcomingEvent();
   }, []);
-  
+
+  useEffect(() => {
+    // Create Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect(); // Stop observing once triggered
+          }
+        });
+      },
+      { 
+        threshold: 0.1, // Trigger when at least 10% of the element is visible
+        rootMargin: '0px 0px -100px 0px' // Slightly delayed trigger
+      }
+    );
+
+    // Observe the event card
+    if (eventCardRef.current) {
+      observer.observe(eventCardRef.current);
+    }
+
+    // Cleanup
+    return () => {
+      if (eventCardRef.current) {
+        observer.unobserve(eventCardRef.current);
+      }
+    };
+  }, [eventData]);
 
   return (
     <div className="mt-[160px] sm:mt-[120px] md:mt-[140px] lg:mt-[110px]">
@@ -101,42 +118,76 @@ export default function UpComing() {
         </div>
       ) : (
         <div
-         className="w-full relative overflow-hidden max-w-4xl mx-auto flex flex-wrap lg:flex-nowrap items-stretch gap-0 p-3 rounded-3xl m-10 "
+          ref={eventCardRef}
+          className={`
+            w-full relative overflow-hidden max-w-4xl mx-auto p-3 rounded-3xl m-10 
+            transition-all duration-1000 ease-out
+            ${isVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-20'}
+          `}
           style={{
             background: "rgb(69,170,247)",
             backgroundImage:
               "linear-gradient(135deg, rgba(69,170,247,1) 21%, rgba(44,38,38,1) 51%, rgba(47,54,51,1) 100%)",
           }}
         >
-          {/* First Div */}
-          <div className="w-full lg:w-1/2  p-4 rounded-3xl">
-            <img
-              src={eventData.photo}
-              alt="Event"
-              className="w-full h-auto object-cover rounded-lg mb-2"
-            />
-          </div>
-
-          {/* Second Div*/}
-          <div className="w-full lg:w-1/2 p-8 ">
-            <h2 className="text-2xl lg:text-4xl md:text-3xl font-semibold text-left text-white mb-4">
-              {eventData.name}
-            </h2>
-            <p className="text-left text-gray-200 mb-6">
-              About event: {eventData.description}
-              <br />
-              <span className="block text-left mt-2 font-medium text-gray-400">
-                Date: {eventData.date}
-              </span>
-            </p>
-            <div className="flex justify-end">
-              <a
-                href={eventData.registerLink}
-                className="py-2 px-4 bg-orange-500 text-white font-bold text-lg rounded-lg text-center hover:bg-orange-600 transition duration-300"
-              >
-                Register Now
-              </a>
+          <p className="text-white font-medium animate-scroll whitespace-nowrap">
+            Hurry! Registration closes on <strong>{eventData.lastDate}</strong>.
+          </p>
+          <div 
+            className="flex flex-wrap lg:flex-nowrap items-stretch gap-0 p-3 rounded-3xl"
+            style={{
+              background: "rgb(69,170,247)",
+              backgroundImage:
+                "linear-gradient(135deg, rgba(69,170,247,1) 21%, rgba(44,38,38,1) 51%, rgba(47,54,51,1) 100%)",
+            }}
+          >
+            {/* First Div */}
+            <div className="w-full lg:w-1/2 p-4 rounded-3xl">
+              <img
+                src={eventData.photo}
+                alt="Event"
+                className="w-full h-auto object-cover rounded-lg mb-2"
+              />
             </div>
+
+            {/* Second Div */}
+            <div className="w-full lg:w-1/2 p-8 ">
+              <h2 className="text-2xl lg:text-4xl md:text-3xl font-semibold text-left text-white mb-4">
+                {eventData.name}
+              </h2>
+              <p className="text-left text-gray-200 mb-6">
+                About event: {eventData.description}
+                <br />
+                <span className="block text-left mt-2 font-medium text-gray-400">
+                  Event Date: {eventData.date}
+                </span>
+              </p>
+              <div className="flex justify-end">
+                <a
+                  href={eventData.registerLink}
+                  className="px-6 py-2 rounded-md bg-gradient-to-r from-blue-500 to-orange-500 text-white font-semibold hover:bg-gradient-to-l"
+                >
+                  Register Now
+                </a>
+              </div>
+            </div>
+
+            <style jsx>{`
+              @keyframes scroll {
+                0% {
+                  transform: translateX(100%);
+                }
+                100% {
+                  transform: translateX(-100%);
+                }
+              }
+              .animate-scroll {
+                display: inline-block;
+                animation: scroll 10s linear infinite;
+              }
+            `}</style>
           </div>
         </div>
       )}

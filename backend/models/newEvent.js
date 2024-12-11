@@ -6,6 +6,7 @@ const newEventSchema = new mongoose.Schema({
   description: { type: String, required: true },
   photo: { type: String, required: true },
   registerLink: { type: String, required: true },
+  lastDate: {type: Date, required: true},
 });
 
 // Use a unique model name

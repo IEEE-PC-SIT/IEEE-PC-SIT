@@ -11,6 +11,7 @@ const UpcomingEvent = () => {
     date: '',
     description: '',
     registerLink: '',
+    lastDate: '',
     photo: null,
   });
 
@@ -73,7 +74,7 @@ const UpcomingEvent = () => {
       const data = await response.json();
       if (data.message) {
         toast.success(data.message);
-        setFormData({ name: '', date: '', description: '', registerLink: '', photo: null });
+        setFormData({ name: '', date: '', description: '', registerLink: '',lastDate: '', photo: null });
         setEditingEvent(null);
         fetchEvents();
       } else {
@@ -140,6 +141,13 @@ const UpcomingEvent = () => {
           value={formData.registerLink}
           onChange={handleChange}
         />
+        <input
+          type="date"
+          name="lastDate"
+          placeholder="Last Date for register"
+          value={formData.lastDate}
+          onChange={handleChange}
+        />
         <input type="file" onChange={handleFileChange} />
         <button onClick={handleSubmit}>
            Create Upcoming Event
@@ -154,10 +162,11 @@ const UpcomingEvent = () => {
               <img src={event.photo} alt={event.name} />
               <h3>{event.name}</h3>
               <p>{event.description}</p>
-              <p>{new Date(event.date).toDateString()}</p>
+              <p>Event Date : {new Date(event.date).toDateString()}</p>
               <a href={event.registerLink} target="_blank" rel="noopener noreferrer">
                 Register Here
               </a>
+              <p>Event Register last date: {new Date(event.lastDate).toDateString()}</p>
               <button onClick={() => setEditingEvent(event)}>Edit</button>
               <button onClick={() => handleDelete(event._id)}>Delete</button>
             </div>
@@ -198,6 +207,13 @@ const UpcomingEvent = () => {
               value={formData.registerLink}
               onChange={handleChange}
             />
+            <input
+          type="date"
+          name="lastDate"
+          placeholder="Last Date for register"
+          value={formData.lastDate}
+          onChange={handleChange}
+        />
             <input type="file" onChange={handleFileChange} />
             <button onClick={handleSubmit}>
               Update Event

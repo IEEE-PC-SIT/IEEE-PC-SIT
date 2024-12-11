@@ -43,7 +43,7 @@ const Login = () => {
   // Redirect to the addproducts page after successful login
   useEffect(() => {
     if (loggedIn) {
-      window.location.replace('/feedbacks');
+      window.location.replace('/');
     }
   }, [loggedIn]); // Redirect when loggedIn state changes
 

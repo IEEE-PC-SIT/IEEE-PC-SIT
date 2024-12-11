@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Feedback.css";
 
-const BASE_URL = "http://localhost:5000"; // Replace with your server URL
+import BASE_URL from '../../service/BaseAddress';
 
 const Feedback = () => {
   const [feedbackList, setFeedbackList] = useState([]);

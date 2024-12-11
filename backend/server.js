@@ -21,6 +21,10 @@ mongoose.connect(process.env.MONGO_URI)
 // Admin Authentication Middleware
 const adminAuth = require('./middleware/adminAuth'); 
 
+app.get('/',(req,res)=>{
+  res.send("Express app is Running ");
+})
+
 app.use('/api/admin', adminAuthRoutes); 
 app.use('/api/events',  eventRoutes);
 app.use('/api/feedback', memberFeedbackRoutes);

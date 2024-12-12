@@ -17,7 +17,7 @@ export default function Footer() {
           <a href="https://www.linkedin.com/company/ieee-photonics-and-comsoc-sit-chapter/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-500">
             <AiOutlineLinkedin size={30} />
           </a>
-          <a href="mailto:example@email.com" className="text-white hover:text-blue-500">
+          <a href="mailto:sit.photonics.chapter@gmail.com" className="text-white hover:text-blue-500">
             <AiOutlineMail size={30} />
           </a>
         </div>

@@ -1,23 +1,31 @@
-// src/app/api/feedback/submit/route.js
 import dbConnect from '../../../services/dbConnect';
 import Feedback from '../../../models/feedback';
 
-export const POST = async (req, res) => {
+export const POST = async (req) => {
   await dbConnect();
 
   try {
-    const { feedback, submittedBy } = await req.json(); // Use req.json() in Next.js 13+ for body parsing
+    const { feedback, submittedBy } = await req.json(); 
 
     if (!feedback || !submittedBy) {
-      return res.status(400).json({ message: 'Feedback and user identity are required' });
+      return new Response(
+        JSON.stringify({ message: 'Feedback and user identity are required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
     const newFeedback = new Feedback({ feedback, submittedBy });
     await newFeedback.save();
 
-    return res.status(201).json({ message: 'Feedback submitted successfully' });
+    return new Response(
+      JSON.stringify({ message: 'Feedback submitted successfully' }),
+      { status: 201, headers: { 'Content-Type': 'application/json' } }
+    );
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: 'Error submitting feedback', error: err.message });
+    return new Response(
+      JSON.stringify({ message: 'Error submitting feedback', error: err.message }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 };

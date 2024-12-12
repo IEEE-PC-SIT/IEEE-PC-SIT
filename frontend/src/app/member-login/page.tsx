@@ -9,7 +9,7 @@ import { cn } from "@/app/lib/utils";
 // const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 import BASE_URL from '../services/BaseAddress';
-
+// const BASE_URL ='http://localhost:5000'
 interface MemberDetails {
   name: string;
   usn: string;
@@ -98,9 +98,10 @@ export default function LoginPage() {
         throw new Error("Failed to update profile!");
       }
 
-      setMessage("Profile updated successfully!");
+      alert("Profile updated successfully!");
+      window.location.reload();
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Error updating profile");
+      alert(error instanceof Error ? error.message : "Error updating profile");
     }
   };
 
@@ -122,10 +123,10 @@ export default function LoginPage() {
         throw new Error("Failed to submit feedback!");
       }
 
-      setMessage("Feedback submitted successfully!");
+      alert("Feedback submitted successfully!");
       setFeedback("");
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Error submitting feedback");
+      alert(error instanceof Error ? error.message : "Error submitting feedback");
     }
   };
 

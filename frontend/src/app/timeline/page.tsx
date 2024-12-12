@@ -17,7 +17,7 @@ const Events: React.FC = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/api/events/list-events`, {
+      const response = await fetch(`${BASE_URL}/api/events`, {
         method: "GET",
       });
       if (!response.ok) {

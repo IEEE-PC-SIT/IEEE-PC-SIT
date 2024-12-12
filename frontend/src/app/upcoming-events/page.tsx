@@ -4,6 +4,7 @@ import { SparklesCore } from "../components/ui/sparkles/Sparkles";
 import React, { useEffect, useState, useRef } from "react";
 import BASE_URL from '../services/BaseAddress';
 
+
 interface EventData {
   name: string;
   photo: string;
@@ -34,7 +35,7 @@ export default function UpComing() {
   useEffect(() => {
     const fetchUpcomingEvent = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/newevent/list-new-events`);
+        const response = await fetch(`${BASE_URL}/api/newEvent`);
         if (!response.ok) {
           throw new Error("Failed to fetch event details!");
         }

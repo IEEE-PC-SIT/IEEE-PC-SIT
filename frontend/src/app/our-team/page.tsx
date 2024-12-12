@@ -67,10 +67,10 @@ export default function OurTeam() {
               className="w-40 h-40 rounded-full object-cover mb-4 border-4 border-blue-500"
             />
             <h3 className="text-lg font-semibold text-gray-800 text-center">
-              T.N Chandrika
+              Dr. T.N Chandrika
             </h3>
             <p className="text-sm text-gray-700 text-center">
-              Faculty Coordinator
+              Associate Professor ETE dept.
             </p>
           </motion.div>
         </motion.div>

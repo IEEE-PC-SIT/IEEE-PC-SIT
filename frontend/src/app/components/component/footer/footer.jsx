@@ -8,13 +8,13 @@ export default function Footer() {
       <hr className="w-full h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 border-0 rounded-full opacity-100 transform scale-x-100 origin-left" />
         {/* Social Media Icons */}
         <div className="flex justify-center  items-center gap-6 mb-8 lg:mb-0 mt-6">
-          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-500">
+          <a href="https://www.instagram.com/sit.ieee.photonics.comsoc/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-500">
             <AiOutlineInstagram size={30} />
           </a>
-          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-500">
+          <a href="https://www.facebook.com/sit.photonics/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-500">
             <AiOutlineFacebook size={30} />
           </a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-500">
+          <a href="https://www.linkedin.com/company/ieee-photonics-and-comsoc-sit-chapter/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-500">
             <AiOutlineLinkedin size={30} />
           </a>
           <a href="mailto:example@email.com" className="text-white hover:text-blue-500">

@@ -14,8 +14,8 @@ export default function Navbar() {
       <div className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 text-white text-sm py-1 overflow-hidden">
         <div className="animate-marquee whitespace-nowrap">
           <a href="/upcoming-events">
-            🔥 Welcome to IEEE Photonics and ComSoc! Join us for exciting events
-            and activities. Stay tuned! 🔥
+             Welcome to IEEE Photonics and ComSoc! Join us for exciting events
+            and activities. Stay tuned! 
           </a>
         </div>
       </div>
